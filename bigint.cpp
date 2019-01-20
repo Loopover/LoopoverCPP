@@ -34,7 +34,7 @@ void add(const BigInt &first, const BigInt &second, BigInt &result) {
 void mul(const BigInt &first, const BigInt &second, BigInt &result) {
     result.clear();
     for (size_t i = 0; i < first.size(); i++) {
-        BigInt intermediate = {};
+        BigInt intermediate;
         for (int j = 0; j < (int)i; j++) {
             intermediate.push_back(0);
         }

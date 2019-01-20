@@ -1,5 +1,6 @@
 #include "bigint.h"
 #include "board.h"
+#include "fact.h"
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 
@@ -27,20 +28,10 @@ void board_hash(const Board<N> &board, BigInt &result) {
     
     _flatten(board, s);
 
-    // Precompute factorials from 0 to N*N
-    std::vector<BigInt> fact;
-    fact.push_back({ 1 });
-    for (int i = 1; i < N*N; i++) {
-        BigInt f = { i };
-        BigInt r;
-        mul(fact[i-1], f, r);
-        fact.emplace_back(r);
-    }
-
     result.clear();
     // Converts s (base factorial) to base 2^32 and stores the result in result
     for (int i = 0; i < N*N; i++) {
-        BigInt b(fact[N*N-i-1]);
+        BigInt b(factorial(N*N-i-1));
         int order = (int)t.order_of_key(s[i]);
         BigInt v = { s[i] - order - 1 };
         t.insert(s[i]);
@@ -54,7 +45,7 @@ void board_hash(const Board<N> &board, BigInt &result) {
 }
 
 template <int N>
-void board_unhash(const BigInt &hash, Board<N> &result) {
+void board_dehash(const BigInt &hash, Board<N> &result) {
 
 }
 
