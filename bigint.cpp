@@ -1,4 +1,4 @@
-#include "bigint.h"
+#include "bigint.hpp"
 
 // Mem optimisations
 void trim(BigInt &x) {

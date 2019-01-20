@@ -1,4 +1,4 @@
-#include "boardhashing.h"
+#include "boardhashing.hpp"
 
 template <int N>
 void _flatten(const Board<N> &board, std::vector<int> &result) {
@@ -24,11 +24,11 @@ void _deflatten(const vector<int> &result, Board<N> &board) {
 // Btw, the log^2 N comes from BigInt multiplication
 //
 // If integer arithmetic always took constant time, we would have O(N^2 log N)
-template <int N> 
+template <int N>
 void board_hash(const Board<N> &board, BigInt &result) {
     std::vector<int> s;
     ordered_set t;
-    
+
     _flatten(board, s);
 
     result.clear();
@@ -38,10 +38,10 @@ void board_hash(const Board<N> &board, BigInt &result) {
         int order = (int)t.order_of_key(s[i]);
         BigInt v = { s[i] - order - 1 };
         t.insert(s[i]);
-        
+
         BigInt product;
         mul(b, v, product);
-        
+
         BigInt temp(result);
         add(temp, product, result);
     }
