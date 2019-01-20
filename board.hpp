@@ -2,6 +2,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 enum Move {
     Up,
@@ -12,6 +13,7 @@ enum Move {
 
 template <int N>
 class Board {
+        int total_moves;
     public:
         int tiles[N][N];
         Board() {
@@ -23,6 +25,57 @@ class Board {
             }
         }
         void do_move(Move op, int index) {
-            
+            int temp[N];
+            switch (op) {
+                case Up:
+                    // Index is the column
+                    for (int i = 0; i < N; i++) {
+                        temp[i] = this->tiles[i][ind];
+                    }
+                    for (int i = 0; i < N; i++) {
+                        this->tiles[(i+1)%N][ind] = temp[i];
+                    }
+                    break;
+                case Right:
+                    for (int i = 0; i < N; i++) {
+                        temp[i] = this->tiles[ind][i];
+                    }
+                    for (int i = 0; i < N; i++) {
+                        this->tiles[ind][(i+1)%N] = temp[i];
+                    }
+                    break;
+                case Down:
+                    // Index is the column
+                    for (int i = 0; i < N; i++) {
+                        temp[i] = this->tiles[i][ind];
+                    }
+                    for (int i = 0; i < N; i++) {
+                        this->tiles[i][ind] = temp[(i+1)%N];
+                    }
+                    break;
+                case Left:
+                    for (int i = 0; i < N; i++) {
+                        temp[i] = this->tiles[ind][i];
+                    }
+                    for (int i = 0; i < N; i++) {
+                        this->tiles[ind][i] = temp[(i+1)%N];
+                    }
+                    break;
+            }
+            this->total_moves++;
+        }
+        int get_total_moves() {
+            return this->total_moves;
+        }
+        void disp(Move op, int index) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (j != N-1) {
+                        printf("%d ", this->tiles[i][j]);
+                    } else {
+                        printf("%d\n", this->tiles[i][j]);
+                    }
+                }
+            }
         }
 };
