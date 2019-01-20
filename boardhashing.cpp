@@ -38,8 +38,7 @@ void board_hash(const Board<N> &board, BigInt &result) {
     }
 }
 
-// This is currently the main function, this will soon be moved to main.cpp when I get around to it
-int main() {
+int board_test() {
     printf("Doing hashing test\n");
     Board<5> board;
     board.disp();
