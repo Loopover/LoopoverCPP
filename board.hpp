@@ -67,7 +67,7 @@ class Board {
         int get_total_moves() {
             return this->total_moves;
         }
-        void disp(Move op, int index) {
+        void disp() {
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (j != N-1) {
