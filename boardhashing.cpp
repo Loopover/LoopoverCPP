@@ -21,7 +21,7 @@ void _flatten(const Board<N> &board, std::vector<int> &result) {
 //
 // If integer arithmetic always took constant time, we would have O(N^2 log N)
 template <int N> 
-void hash(const Board<N> &board, BigInt &result) {
+void board_hash(const Board<N> &board, BigInt &result) {
     std::vector<int> s;
     ordered_set t;
     
@@ -45,7 +45,6 @@ void hash(const Board<N> &board, BigInt &result) {
         BigInt v = { s[i] - order - 1 };
         t.insert(s[i]);
         
-        printf("i: %d\tb: %d\tv:%d\n", i, b[0], v[0]);
         BigInt product;
         mul(b, v, product);
         
@@ -54,12 +53,17 @@ void hash(const Board<N> &board, BigInt &result) {
     }
 }
 
+template <int N>
+void board_unhash(const BigInt &hash, Board<N> &result) {
+
+}
+
 // This is currently the main function, this will soon be moved to main.cpp when I get around to it
 int main() {
     printf("Doing hashing test\n");
     Board<5> board;
     BigInt h;
-    hash<5>(board, h);
+    board_hash<5>(board, h);
     disp(h);
     printf("Doing hashing test with slightly different board\n");
     board.tiles[0][0] = 5; // Digits 90-94 of PI (after decimal place)
@@ -67,6 +71,6 @@ int main() {
     board.tiles[0][2] = 4;
     board.tiles[0][3] = 2;
     board.tiles[0][4] = 1;
-    hash<5>(board, h);
+    board_hash<5>(board, h);
     disp(h);
 }
