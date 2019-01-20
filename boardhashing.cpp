@@ -1,10 +1,4 @@
-#include "bigint.h"
-#include "board.h"
-#include "fact.h"
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-
-typedef __gnu_pbds::tree<int, __gnu_pbds::null_type, std::less<int>, __gnu_pbds::rb_tree_tag, __gnu_pbds::tree_order_statistics_node_update> ordered_set;
+#include "boardhashing.h"
 
 template <int N>
 void _flatten(const Board<N> &board, std::vector<int> &result) {
@@ -12,6 +6,15 @@ void _flatten(const Board<N> &board, std::vector<int> &result) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             result.push_back(board.tiles[i][j]);
+        }
+    }
+}
+
+template <int N>
+void _deflatten(const vector<int> &result, Board<N> &board) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            board[i][j] = result[N*i+j];
         }
     }
 }
@@ -42,11 +45,6 @@ void board_hash(const Board<N> &board, BigInt &result) {
         BigInt temp(result);
         add(temp, product, result);
     }
-}
-
-template <int N>
-void board_dehash(const BigInt &hash, Board<N> &result) {
-
 }
 
 // This is currently the main function, this will soon be moved to main.cpp when I get around to it
