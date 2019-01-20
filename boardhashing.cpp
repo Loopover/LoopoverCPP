@@ -42,15 +42,26 @@ void board_hash(const Board<N> &board, BigInt &result) {
 int main() {
     printf("Doing hashing test\n");
     Board<5> board;
+    board.disp();
     BigInt h;
     board_hash<5>(board, h);
     disp(h);
+
+    printf("Moving col 0 UP\n");
+    board.do_move(Up, 0);
+    board.disp();
+
     printf("Doing hashing test with slightly different board\n");
-    board.tiles[0][0] = 5; // Digits 90-94 of PI (after decimal place)
-    board.tiles[0][1] = 3;
-    board.tiles[0][2] = 4;
-    board.tiles[0][3] = 2;
-    board.tiles[0][4] = 1;
     board_hash<5>(board, h);
     disp(h);
+
+    printf("Moving row 2 RIGHT\n");
+    board.do_move(Right, 2);
+    board.disp();
+
+    printf("Recalculating hash...\n");
+    board_hash<5>(board, h);
+    disp(h);
+
+    return 0;
 }

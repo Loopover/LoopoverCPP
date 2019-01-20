@@ -2,7 +2,6 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
 
 enum Move {
     Up,
@@ -24,7 +23,7 @@ class Board {
                 }
             }
         }
-        void do_move(Move op, int index) {
+        void do_move(Move op, int ind) {
             int temp[N];
             switch (op) {
                 case Up:
@@ -33,7 +32,7 @@ class Board {
                         temp[i] = this->tiles[i][ind];
                     }
                     for (int i = 0; i < N; i++) {
-                        this->tiles[(i+1)%N][ind] = temp[i];
+                        this->tiles[i][ind] = temp[(i+1)%N];
                     }
                     break;
                 case Right:
@@ -58,7 +57,7 @@ class Board {
                         temp[i] = this->tiles[ind][i];
                     }
                     for (int i = 0; i < N; i++) {
-                        this->tiles[ind][i] = temp[(i+1)%N];
+                        this->tiles[ind][(i+1)%N] = temp[i];
                     }
                     break;
             }
@@ -71,9 +70,9 @@ class Board {
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (j != N-1) {
-                        printf("%d ", this->tiles[i][j]);
+                        printf("%4d ", this->tiles[i][j]);
                     } else {
-                        printf("%d\n", this->tiles[i][j]);
+                        printf("%4d\n", this->tiles[i][j]);
                     }
                 }
             }
