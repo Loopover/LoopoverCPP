@@ -9,3 +9,5 @@ typedef __gnu_pbds::tree<int, __gnu_pbds::null_type, std::less<int>, __gnu_pbds:
 
 template <int N>
 void board_hash(const Board<N> &board, BigInt &result);
+
+int board_test();

@@ -10,6 +10,15 @@ void _flatten(const Board<N> &board, std::vector<int> &result) {
     }
 }
 
+template <int N>
+void _deflatten(const std::vector<int> &l, Board<N> &result) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            result[i][j] = l[N*i+j];
+        }
+    }
+}
+
 // Board to BigInt hashing done in O(N^2 log^2 N) time, where N is board size.
 //
 // Btw, the log^2 N comes from BigInt multiplication
@@ -27,7 +36,7 @@ void board_hash(const Board<N> &board, BigInt &result) {
     for (int i = 0; i < N*N; i++) {
         BigInt b(factorial(N*N-i-1));
         int order = (int)t.order_of_key(s[i]);
-        BigInt v = { s[i] - order - 1 };
+        BigInt v = { (unsigned int)(s[i] - order - 1) };
         t.insert(s[i]);
 
         BigInt product;

@@ -7,7 +7,7 @@ BigInt factorial(int x) {
         cache.push_back({ 1 });
     }
     while (x >= cache.size()) {
-        BigInt f = { (int)cache.size() };
+        BigInt f = { (unsigned int)cache.size() };
         BigInt r;
         mul(cache.back(), f, r);
         cache.emplace_back(r);
